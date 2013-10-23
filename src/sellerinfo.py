@@ -1,2 +1,2 @@
-SELLER_ID = "07610507121615632886"
-SELLER_SECRET = "6_oAPqKsmaw11yZ6R9Ojdw"
+SELLER_ID = "insert seller ID"
+SELLER_SECRET = "insert seller secret"
