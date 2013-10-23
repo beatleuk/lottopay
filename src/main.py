@@ -1,21 +1,22 @@
 """Syndicate Lotto Payments Page"""
 
 # standard library imports
-from cgi import escape
 import os
 import time
 
 # third-party imports
-from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
-from google.appengine.ext.webapp.util import run_wsgi_app
+import webapp2
+import jinja2
 import jwt
 
 # application-specific imports
 from sellerinfo import SELLER_ID
 from sellerinfo import SELLER_SECRET
 
-class MainHandler(webapp.RequestHandler):
+jinja_environment = jinja2.Environment(
+  loader=jinja2.FileSystemLoader(os.path.dirname(__file__) + '/templates'))
+
+class MainHandler(webapp2.RequestHandler):
   """Handles /"""
 
   def get(self):
@@ -50,11 +51,11 @@ class MainHandler(webapp.RequestHandler):
                      'jwt_2': token_2,
                      'jwt_3': token_3}
 
-    path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
-    self.response.out.write(template.render(path, template_vals))
+    template_path = 'index.html'
+    template = jinja_environment.get_template(template_path)
+    self.response.out.write(template.render(template_vals))
 
-
-class PostbackHandler(webapp.RequestHandler):
+class PostbackHandler(webapp2.RequestHandler):
   """Handles server postback - received at /postback"""
 
   def post(self):
@@ -80,15 +81,8 @@ class PostbackHandler(webapp.RequestHandler):
             self.response.out.write(order_id)
 
 
-application = webapp.WSGIApplication([
-    ('/', MainHandler),
-    ('/postback', PostbackHandler),
-], debug=True)
+routes = [webapp2.Route('/', MainHandler),
+          webapp2.Route('/postback', PostbackHandler)]
 
+app = webapp2.WSGIApplication(routes, debug=True)
 
-def main():
-  run_wsgi_app(application)
-
-
-if __name__ == '__main__':
-  main()
