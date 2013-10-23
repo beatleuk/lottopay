@@ -1,0 +1,51 @@
+/**
+ * Copyright 2013 Lee Bailey. All Rights Reserved
+ */
+.pay-container {
+  font-size: 10pt;
+  text-align: center;
+}
+
+.warning {
+  font-size: 10pt;
+  font-weight:bold;
+  text-decoration:underline;
+  text-align: center;
+  color: red;
+}
+
+
+h1 {
+	font-family: Verdana;
+}
+
+.eurologo {
+	padding-bottom:20px;
+}
+
+.googlepay {
+	display: block;
+	width: 250px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px; 
+	margin-bottom: 5px;  
+	padding: 2px 2px 2px 2px;
+	border: 2px solid blue;
+	padding-bottom:20px;
+}
+
+p {
+	font-size: 15pt;
+	color: blue;
+}
+.paypal {
+	display: block;
+	width: 250px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5px; 
+	margin-bottom: 5px;  
+	padding: 2px 2px 2px 2px;
+	border: 2px solid blue;	
+}

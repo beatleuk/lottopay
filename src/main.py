@@ -1,8 +1,4 @@
-# Copyright 2012 Google Inc. All Rights Reserved.
-
-# pylint: disable-msg=C6409,C6203
-
-"""In-App Payments - Online Store Python Sample"""
+"""Syndicate Lotto Payments Page"""
 
 # standard library imports
 from cgi import escape
@@ -28,7 +24,7 @@ class MainHandler(webapp.RequestHandler):
     curr_time = int(time.time())
     exp_time = curr_time + 3600
 
-    request_info = {'currencyCode': 'USD',
+    request_info = {'currencyCode': 'GBP',
                     'sellerData': 'Custom Data'}
     jwt_info = {'iss': SELLER_ID,
                 'aud': 'Google',
@@ -38,16 +34,21 @@ class MainHandler(webapp.RequestHandler):
                 'request': request_info}
 
     # create JWT for first item
-    request_info.update({'name': 'Drive In Aniversary Poster', 'price': '20.00'})
+    request_info.update({'name': 'Euro Millions single draw entry', 'price': '2.11'})
     token_1 = jwt.encode(jwt_info, SELLER_SECRET)
 
     # create JWT for second item
-    request_info.update({'name': 'Golden Gate Bridge Poster', 'price': '25.00'})
+    request_info.update({'name': 'Euro Millions bank 10 pounds', 'price': '10.53'})
     token_2 = jwt.encode(jwt_info, SELLER_SECRET)
+
+    # create JWT for third item
+    request_info.update({'name': 'Euro Millions bank 20 pounds', 'price': '21.05'})
+    token_3 = jwt.encode(jwt_info, SELLER_SECRET)
 
     # update store web page
     template_vals = {'jwt_1': token_1,
-                     'jwt_2': token_2}
+                     'jwt_2': token_2,
+                     'jwt_3': token_3}
 
     path = os.path.join(os.path.dirname(__file__), 'templates', 'index.html')
     self.response.out.write(template.render(path, template_vals))

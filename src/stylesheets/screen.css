@@ -8,32 +8,12 @@ body {
   text-align: center;
 }
 
-li {
-  list-style: none;
-}
-
-table {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-ul {
-  margin-top: 0px;
-  padding-left: 0px;
-}
-
-table {
-  text-align: left;
-}
-
 img {
   display: block;
-  width: 230px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5px; 
   margin-bottom: 5px;  
-  border: 2px solid green;
   padding: 2px 2px 2px 2px;
 }
 
@@ -44,6 +24,6 @@ img {
   font-size: 15px;
   font-weight: bold;
   height: 35px;
-  background-color: blue;
+  background-color: #0266C8;
   margin: auto;
 }

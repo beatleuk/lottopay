@@ -1,14 +1,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title>Doodle Poster Store</title>
+    <title>Lottery Payment</title>
     <link href="/stylesheets/screen.css" media="all" rel="stylesheet" type="text/css"/>
+    <link href="/stylesheets/lotto-pay.css" media="all" rel="stylesheet" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     <script language="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load('payments', '1.0', {
-        'packages': ['sandbox_config']
+        'packages': ['production_config']
       });
 
       // Success handler
@@ -32,6 +33,8 @@
           generated_jwt = "{{ jwt_1 }}";
         } else if (item == "Item2") {
           generated_jwt = "{{ jwt_2 }}";
+        } else if (item == "Item3") {
+          generated_jwt = "{{ jwt_3 }}";
         } else {
           return;
         }
@@ -45,21 +48,43 @@
     </script>
   </head>
   <body>
-    <h1>Doodle Poster Store</h1>
-    <table>
-    <tr valign="top">
-      <td>
-      <ul>
-        <li>
-          <img src="images/drivein12.jpg"/>
-          <button class="buy-button" type="button" onClick="purchase('Item1');">Purchase</button></li>
-          <br/>
-        <li>
-        <img src="images/golden_gate.jpg"/>
-        <button class="buy-button" type="button" onClick="purchase('Item2');">Purchase</button></li>
-      </ul>
-      </td>
-    </tr>
-    </table>
+    
+    <div class="pay-container">
+    	<h1>Syndicate lottery payment page</h1>
+    	<div class="warning">Please note that Google charge 5% and PayPal charge 3.4% + 20p</div>
+    	<div>choose the best option for you from below</div>
+    	<div class="eurologo"><img src="http://www.national-lottery.co.uk/player/i/logo/euro_logoballsm.png"/>
+    	</div>
+    	<div class="googlepay">
+    		<a href="http://www.google.co.uk/wallet/" target="_blank"><img border="0" src="https://checkout.google.com/seller/images/acceptancelogo/logo-0-f-en_gb.png"  alt="Google Wallet"></a>
+    		<button class="buy-button" type="button" onClick="purchase('Item1');">Single draw &#163;2</button>
+    		This will cost you &#163;2.11
+    		<button class="buy-button" type="button" onClick="purchase('Item2');">Bank &#163;10</button>
+    		This will cost you &#163;10.53
+    		<button class="buy-button" type="button" onClick="purchase('Item3');">Bank &#163;20</button>
+    		This will cost you &#163;21.05
+    		<img src="images/ccards.gif">
+    	</div>
+    	<div class="paypal">
+    		<img src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg" border="0" alt="PayPal Logo">
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<div class="paypalopts">
+			<div><input type="hidden" name="on0" value="Payment Options"></div>
+				<div class="ppoptslist">
+					<select name="os0">
+					<option value="Single">Single &#163;2 draw - &#163;2.28 GBP</option>
+					<option value="Bank tenner">Bank &#163;10 - &#163;10.56 GBP</option>
+					<option value="Bank twenty">Bank &#163;20 - &#163;20.91 GBP</option>
+					</select>
+				</div>
+			</div>
+			<input type="hidden" name="currency_code" value="GBP">
+			<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+			<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">			</form>
+    	</div>
+    </div>
   </body>
 </html>
